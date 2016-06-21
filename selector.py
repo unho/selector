@@ -105,7 +105,7 @@ class Selector(object):
             for meth, cbl in list(method_dict.items()):
                 method_dict[meth] = self.wrap(cbl)
         regex = self.parser(prefix + path)
-        compiled_regex = re.compile(regex)
+        compiled_regex = re.compile(regex, re.DOTALL | re.MULTILINE)
         mapping = (compiled_regex, method_dict)
         self.mappings.append(mapping)
         return mapping
