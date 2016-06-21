@@ -10,10 +10,12 @@ from resolver import resolve
 
 class MappingFileError(Exception):
     """Raised to signal a syntax error in a mapping file."""
+    pass
 
 
 class PathExpressionParserError(Exception):
     """Raised to signal a syntax error in a path expression."""
+    pass
 
 
 def method_not_allowed(environ, start_response):
