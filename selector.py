@@ -139,9 +139,7 @@ class Selector(object):
         return app(environ, start_response)
 
     def select(self, path, method):
-        """Figure out which app to delegate to or send 404 or 405.
-
-        """
+        """Figure out which app to delegate to or send 404 or 405."""
         response = (self.status404, {}, [], '')
 
         for regex, method_dict in self.mappings:
@@ -369,14 +367,14 @@ class MiddlewareComposer(object):
 
         Each predicate is passes the environ to evaluate.
 
-        Given this set of rules:
+        Given this set of rules::
 
-        t = lambda x: True; f = lambda x: False
-        [(t, a), (f, b), (t, c), (f, d), (t, e)]
+            t = lambda x: True; f = lambda x: False
+            [(t, a), (f, b), (t, c), (f, d), (t, e)]
 
-        The app composed would be equivalent to this:
+        The app composed would be equivalent to this::
 
-        a(c(e(app)))
+            a(c(e(app)))
         """
         app = self.app
         for predicate, middleware in reversed(self.rules):
