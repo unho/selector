@@ -5,7 +5,7 @@ import re
 from itertools import starmap
 from wsgiref.util import shift_path_info
 
-import resolver
+from resolver import resolve
 
 
 class MappingFileError(Exception):
@@ -211,16 +211,16 @@ class Selector(object):
             if directive == 'prefix':
                 self.prefix = rest.strip()
             if directive == 'parser':
-                self.parser = resolver.resolve(rest.strip())
+                self.parser = resolve(rest.strip())
             if directive == 'wrap':
-                self.wrap = resolver.resolve(rest.strip())
+                self.wrap = resolve(rest.strip())
         # HTTP Method -> Handler:
         elif line[0] in ' \t':
             if path is None:
                 raise MappingFileError(
                     "Specify a path expression first.")
             meth, app = line.strip().split(' ', 1)
-            methods[meth.strip()] = resolver.resolve(app)
+            methods[meth.strip()] = resolve(app)
         # Path Expression:
         else:
             if path and methods:
